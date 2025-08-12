@@ -29,7 +29,7 @@ services:
       - ./branding/assets:/usr/share/nginx/html/assets:ro
 
   backend:
-    image: openmrs/openmrs-reference-application-3-backend:qa
+    image: openmrs/openmrs-reference-application-3-backend:3.4.0
     restart: "unless-stopped"
     depends_on:
       - db
