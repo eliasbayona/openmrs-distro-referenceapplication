@@ -10,13 +10,16 @@ pipeline {
             credentialsId: 'github-pat'
       }
     }
-    stage('Build & Deploy') {
+    stage('Deploy') {
       steps {
         sh '''
           set -euxo pipefail
-          [ -f .env ] && export $(grep -v '^#' .env | xargs) || true
-          ${COMPOSE} pull || true
-          ${COMPOSE} build --pull
+          # Safely load .env if present (handles spaces and quotes)
+          if [ -f .env ]; then
+            set -a
+            . ./.env
+            set +a
+          fi
           ${COMPOSE} up -d
           ${COMPOSE} ps
         '''
@@ -28,6 +31,11 @@ pipeline {
     }
   }
   post {
-    failure { sh 'docker compose logs --no-color || true' }
+    failure {
+      sh '''
+        set -e
+        ${COMPOSE} logs --no-color || true
+      '''
+    }
   }
 }
