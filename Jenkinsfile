@@ -20,7 +20,7 @@ pipeline {
             . ./.env
             set +a
           fi
-          ${COMPOSE} down
+          ${COMPOSE} down -v
           ${COMPOSE} up -d
           ${COMPOSE} ps
         '''
