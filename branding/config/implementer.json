@@ -29,31 +29,31 @@
   },
   "@openmrs/esm-patient-registration-app": {
     "fieldDefinitions": [
-      { "id": "mobile", "name": "Mobile", "type": "person attribute", "uuid": "d68635b4-13ad-4df3-b614-9e84ffafc48d",
+      { "id": "mobile", "name": "Mobile", "type": "person attribute", "uuid": "ad059cd7-08d5-4825-9473-e69c4adda456",
         "validation": { "matches": "^[0-9+()\\-\\s]{6,}$" } },
-      { "id": "landline", "name": "Landline", "type": "person attribute", "uuid": "f7a68fe7-9c91-4f5f-ab60-4e2f9d3588f7" },
-      { "id": "postalAddress", "name": "Postal Address (city/town/village)", "type": "person attribute", "uuid": "a3ffb3a0-64a2-4529-9016-8afe75218566" },
+      { "id": "landline", "name": "Landline", "type": "person attribute", "uuid": "24daef21-0510-4cf3-a03b-6b50d7ce7027" },
+      { "id": "postalAddress", "name": "Postal Address (city/town/village)", "type": "person attribute", "uuid": "fc7c5799-3fa7-499b-9ab7-6d323fce7aad" },
 
-      { "id": "nokName", "name": "Next Of Kin Full Name", "type": "person attribute", "uuid": "e3672906-4446-4924-b19b-3ecd1422d2bf" },
-      { "id": "nokPhone", "name": "Next Of Kin Phone Number", "type": "person attribute", "uuid": "0d52a088-a137-4fa2-9285-d6763b76762a",
-        "validation": { "matches": "^[0-9+()\\-\\s]{6,}$" } },
-
-      { "id": "primaryDoctorName", "name": "Primary Doctor Full Name", "type": "person attribute", "uuid": "1dedf894-64a0-4be9-9c44-0f77307c1b9b" },
-      { "id": "primaryDoctorPhone", "name": "Primary Doctor Phone Number", "type": "person attribute", "uuid": "0d52a088-a137-4fa2-9285-d6763b76762a",
+      { "id": "nokName", "name": "Next Of Kin Full Name", "type": "person attribute", "uuid": "951b7590-ecc4-4a61-8321-37f8550c9d25" },
+      { "id": "nokPhone", "name": "Next Of Kin Phone Number", "type": "person attribute", "uuid": "032238c7-e713-4de7-853c-6638ed3b97f6",
         "validation": { "matches": "^[0-9+()\\-\\s]{6,}$" } },
 
-      { "id": "guarantor", "name": "Guarantor", "type": "person attribute", "uuid": "d80e3899-be13-4062-a063-2e4e40e5b76a" },
-      { "id": "policyholderName", "name": "Policyholder name", "type": "person attribute", "uuid": "b0e906b5-458c-4e90-884d-42bac56b846e" },
+      { "id": "primaryDoctorName", "name": "Primary Doctor Full Name", "type": "person attribute", "uuid": "a53cf88b-05e9-46e4-bb9d-25319e430309" },
+      { "id": "primaryDoctorPhone", "name": "Primary Doctor Phone Number", "type": "person attribute", "uuid": "9b261083-6306-4a56-8cd6-f2cb701d88de",
+        "validation": { "matches": "^[0-9+()\\-\\s]{6,}$" } },
+
+      { "id": "guarantor", "name": "Guarantor", "type": "person attribute", "uuid": "975da596-b892-4fe1-968c-78d6ea1c2b61" },
+      { "id": "policyholderName", "name": "Policyholder name", "type": "person attribute", "uuid": "96e86349-22fd-4dfc-8d30-9cd68ac217ee" },
       { "id": "policyholderRelationship", "name": "Policyholder relationship", "type": "person attribute",
-        "uuid": "93d81ea4-7e34-4c03-ba29-514fd30d19ee", "answerConceptSetUuid": "2f556239-0153-4d73-afff-016690773074" },
-      { "id": "policyStartDate", "name": "Policy start date", "type": "person attribute", "uuid": "df74ee4d-a09a-412c-889e-cd74f82e746f","validation": {
+        "uuid": "a0fdec53-c74d-4c40-b0d5-45070bff4421", "answerConceptSetUuid": "6ae8c9b0-b7d4-44fa-8445-9a3de8f478f1" },
+      { "id": "policyStartDate", "name": "Policy start date", "type": "person attribute", "uuid": "a60942df-9d59-4a2b-bdbf-43bb1ba14e7a","validation": {
         "matches": "^(0[1-9]|[12][0-9]|3[01])\\/(0[1-9]|1[0-2])\\/(19|20)\\d\\d$"
       } },
 
-      { "id": "birthTime", "name": "Birth Time (HH:mm)", "type": "person attribute", "uuid": "377c264c-a09b-44f1-9fd4-75da6d78207f",
+      { "id": "birthTime", "name": "Birth Time (HH:mm)", "type": "person attribute", "uuid": "5d15144e-f96b-4419-a406-1e7b7b848cd3",
         "validation": { "matches": "^([01]?\\d|2[0-3]):[0-5]\\d$" } },
 
-      { "id": "membershipId", "name": "Membership ID", "type": "person attribute", "uuid": "3a360fab-c707-4291-8521-c1b64f1c651a" }
+      { "id": "membershipId", "name": "Membership ID", "type": "person attribute", "uuid": "53dbb4d6-d58c-4375-8af0-8f6151d6c213" }
     ],
 
     "sectionDefinitions": [

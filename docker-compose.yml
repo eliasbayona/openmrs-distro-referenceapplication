@@ -2,7 +2,7 @@ version: "3.7"
 
 services:
   gateway:
-    image: openmrs/openmrs-reference-application-3-gateway:qa
+    image: openmrs/openmrs-reference-application-3-gateway:3.4.0
     restart: "unless-stopped"
     depends_on:
       - frontend
@@ -11,7 +11,7 @@ services:
       - "80:80"
 
   frontend:
-    image: openmrs/openmrs-reference-application-3-frontend:qa
+    image: openmrs/openmrs-reference-application-3-frontend:3.4.0
     restart: "unless-stopped"
     environment:
       SPA_PATH: /openmrs/spa
@@ -29,7 +29,7 @@ services:
       - ./branding/assets:/usr/share/nginx/html/assets:ro
 
   backend:
-    image: openmrs/openmrs-reference-application-3-backend:qa
+    image: openmrs/openmrs-reference-application-3-backend:3.4.0
     restart: "unless-stopped"
     depends_on:
       - db
