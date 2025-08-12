@@ -30,12 +30,18 @@ RUN apk update && \
 # clear any default files installed by nginx
 RUN rm -rf /usr/share/nginx/html/*
 
-COPY startup.sh /usr/local/bin/startup.sh
+COPY startup.sh /usr/local/bin/
 RUN chmod +x /usr/local/bin/startup.sh
+
+# COPY startup.sh .
+# RUN chmod +x .
 
 COPY nginx.conf /etc/nginx/nginx.conf
 
 COPY --from=dev /app/spa /usr/share/nginx/html
 COPY config-core_demo.json /usr/share/nginx/html
 
-CMD ["/usr/local/bin/startup.sh"]
+RUN cd /usr/local/bin/
+CMD ["./startup.sh"]
+# CMD ["startup.sh"]
+

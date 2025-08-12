@@ -1,0 +1,110 @@
+{
+  "@openmrs/esm-login-app": {
+    "logo": {
+      "src": "${openmrsSpaBase}/assets/logo.png",
+      "alt": "Your Clinic"
+    }
+  },
+  "@openmrs/esm-primary-navigation-app": {
+    "logo": {
+      "src": "${openmrsSpaBase}/assets/logo.png",
+      "name": "Your Clinic"
+    },
+    "extensionSlots": {
+      "homepage-dashboard-slot": {
+        "remove": [
+          "service-queues-dashboard-link"
+        ],
+        "configure": {
+          "patient-lists-dashboard-link": {
+            "title": "patientLists"
+          }
+        }
+      }
+    },
+    "Translation overrides": {
+      "en": { "patientLists": "Patient-Lists" },
+      "fr": { "patientLists": "Listes de patients" }
+    }
+  },
+  "@openmrs/esm-patient-registration-app": {
+    "fieldDefinitions": [
+      { "id": "mobile", "name": "Mobile", "type": "person attribute", "uuid": "d68635b4-13ad-4df3-b614-9e84ffafc48d",
+        "validation": { "matches": "^[0-9+()\\-\\s]{6,}$" } },
+      { "id": "landline", "name": "Landline", "type": "person attribute", "uuid": "f7a68fe7-9c91-4f5f-ab60-4e2f9d3588f7" },
+      { "id": "postalAddress", "name": "Postal Address (city/town/village)", "type": "person attribute", "uuid": "a3ffb3a0-64a2-4529-9016-8afe75218566" },
+
+      { "id": "nokName", "name": "Next Of Kin Full Name", "type": "person attribute", "uuid": "e3672906-4446-4924-b19b-3ecd1422d2bf" },
+      { "id": "nokPhone", "name": "Next Of Kin Phone Number", "type": "person attribute", "uuid": "0d52a088-a137-4fa2-9285-d6763b76762a",
+        "validation": { "matches": "^[0-9+()\\-\\s]{6,}$" } },
+
+      { "id": "primaryDoctorName", "name": "Primary Doctor Full Name", "type": "person attribute", "uuid": "1dedf894-64a0-4be9-9c44-0f77307c1b9b" },
+      { "id": "primaryDoctorPhone", "name": "Primary Doctor Phone Number", "type": "person attribute", "uuid": "0d52a088-a137-4fa2-9285-d6763b76762a",
+        "validation": { "matches": "^[0-9+()\\-\\s]{6,}$" } },
+
+      { "id": "guarantor", "name": "Guarantor", "type": "person attribute", "uuid": "d80e3899-be13-4062-a063-2e4e40e5b76a" },
+      { "id": "policyholderName", "name": "Policyholder name", "type": "person attribute", "uuid": "b0e906b5-458c-4e90-884d-42bac56b846e" },
+      { "id": "policyholderRelationship", "name": "Policyholder relationship", "type": "person attribute",
+        "uuid": "93d81ea4-7e34-4c03-ba29-514fd30d19ee", "answerConceptSetUuid": "2f556239-0153-4d73-afff-016690773074" },
+      { "id": "policyStartDate", "name": "Policy start date", "type": "person attribute", "uuid": "df74ee4d-a09a-412c-889e-cd74f82e746f","validation": {
+        "matches": "^(0[1-9]|[12][0-9]|3[01])\\/(0[1-9]|1[0-2])\\/(19|20)\\d\\d$"
+      } },
+
+      { "id": "birthTime", "name": "Birth Time (HH:mm)", "type": "person attribute", "uuid": "377c264c-a09b-44f1-9fd4-75da6d78207f",
+        "validation": { "matches": "^([01]?\\d|2[0-3]):[0-5]\\d$" } },
+
+      { "id": "membershipId", "name": "Membership ID", "type": "person attribute", "uuid": "3a360fab-c707-4291-8521-c1b64f1c651a" }
+    ],
+
+    "sectionDefinitions": [
+      {
+        "id": "insuranceInfo",
+        "name": "Insurance Information",
+        "fields": ["guarantor", "policyholderName", "policyholderRelationship", "policyStartDate", "membershipId"]
+      },
+      {
+        "id": "additionalPatientInfo",
+        "name": "Additional Patient Information",
+        "fields": ["mobile", "landline", "postalAddress", "nokPhone", "nokName", "primaryDoctorPhone", "primaryDoctorName"]
+      }
+    ],
+
+    "sections": [
+      "demographics",
+      "relationships",
+      "contact",
+      "insuranceInfo",
+      "additionalPatientInfo"
+    ],
+    "fieldConfigurations": {
+      "address": {
+        "useAddressHierarchy": {
+          "useQuickSearch": false
+        }
+      },
+      "gender": [
+        { "id": "male", "value": "Male", "label": "Male" },
+        { "id": "female", "value": "Female", "label": "Female" },
+        { "id": "other", "value": "Other", "label": "Other" }
+      ]
+    },
+    "Translation overrides": {
+      "en": {
+        "Location.streetAddress": "Street Address",
+        "Location.plotNumber": "Plot Number",
+        "Location.address3": "Ward (Kgotla)",
+        "Location.cityVillage": "City/Town/Village",
+        "Location.countyDistrict": "District",
+        "Location.country": "Country",
+        "Location.postalCode": "Postal Code"
+      }
+    }
+  },
+  "@openmrs/esm-styleguide": {
+    "Brand color #1": "#831717",
+    "Brand color #2": "#831717",
+    "Brand color #3": "#1978bd"
+   
+  }
+}
+
