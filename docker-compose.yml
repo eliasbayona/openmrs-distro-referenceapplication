@@ -86,22 +86,21 @@ services:
       timeout: 5s
       retries: 5
 
-  dhis2:
-    image: dhis2/core:2.40
-    ports:
-      - "8090:8080"
-    volumes:
-      - ./dhis2-data:/data
-      # - ./dhis.conf:/data/dhis.conf:ro
-      - ./mysql-connector-j-9.4.0.jar:/usr/local/tomcat/lib/mysql-connector-j-9.4.0.jar:ro
-    environment:
-      - DHIS2_HOME=/data
-      - DHIS2_DATABASE_HOST=postgresqldb
-      - DHIS2_DATABASE_NAME=dhis2
-      - DHIS2_DATABASE_USERNAME=dhis
-      - DHIS2_DATABASE_PASSWORD=dhis
-    depends_on:
-      - postgresqldb
+  # dhis2:
+  #   image: dhis2/core:2.40
+  #   ports:
+  #     - "8090:8080"
+  #   volumes:
+  #     - ./dhis2-data:/data
+  #     - ./dhis.conf:/data/dhis.conf:ro
+  #   environment:
+  #     - DHIS2_HOME=/data
+  #     - DHIS2_DATABASE_HOST=postgresqldb
+  #     - DHIS2_DATABASE_NAME=dhis2
+  #     - DHIS2_DATABASE_USERNAME=dhis
+  #     - DHIS2_DATABASE_PASSWORD=dhis
+  #   depends_on:
+  #     - postgresqldb
 
   portainer:
     image: portainer/portainer-ce:latest
