@@ -9,6 +9,10 @@ services:
       - backend
     ports:
       - "80:80"
+      - "443:443"
+    volumes:
+      - ./gateway/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./certs:/etc/nginx/certs:ro
 
   frontend:
     image: openmrs/openmrs-reference-application-3-frontend:3.4.0
@@ -16,9 +20,9 @@ services:
     environment:
       SPA_PATH: /openmrs/spa
       API_URL: /openmrs
-      # SPA_CONFIG_URLS: /openmrs/spa/config-core_demo.json
+      # API_URL: http://backend:8080/openmrs
       SPA_CONFIG_URLS: /openmrs/spa/config/implementer.json
-      SPA_DEFAULT_LOCALE:
+      SPA_DEFAULT_LOCALE: en
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost/"]
       timeout: 5s
@@ -33,6 +37,7 @@ services:
     restart: "unless-stopped"
     depends_on:
       - db
+      - dhis2
     environment:
       OMRS_CONFIG_MODULE_WEB_ADMIN: "true"
       OMRS_CONFIG_AUTO_UPDATE_DATABASE: "true"
@@ -46,10 +51,12 @@ services:
       timeout: 5s
     volumes:
       - openmrs-data:/openmrs/data
+      - ./forms:/openmrs/data/forms
+      - ./openmrs-data/log4j2.xml:/openmrs/data/log4j2.xml:ro
+      - ./openmrs-data/openmrs.properties:/openmrs/data/openmrs.properties:ro
 
-  # MariaDB
   db:
-    image: mariadb:10.11.7
+    image: mysql:latest
     restart: "unless-stopped"
     command: "mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_general_ci"
     healthcheck:
@@ -65,6 +72,54 @@ services:
     volumes:
       - db-data:/var/lib/mysql
 
+  postgresqldb:
+    image: postgis/postgis:13-3.3
+    environment:
+      POSTGRES_DB: dhis2
+      POSTGRES_USER: dhis
+      POSTGRES_PASSWORD: dhis
+    volumes:
+      - pg-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "dhis", "-d", "dhis2"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  dhis2:
+    image: dhis2/core:2.40
+    ports:
+      - "8090:8080"
+    volumes:
+      - ./dhis2-data:/data
+      - ./dhis.conf:/data/dhis.conf:ro
+      - ./mysql-connector-j-9.4.0.jar:/usr/local/tomcat/lib/mysql-connector-j-9.4.0.jar:ro
+    environment:
+      - DHIS2_HOME=/data
+      - DHIS2_DATABASE_HOST=postgresqldb
+      - DHIS2_DATABASE_NAME=dhis2
+      - DHIS2_DATABASE_USERNAME=dhis
+      - DHIS2_DATABASE_PASSWORD=dhis
+    depends_on:
+      - postgresqldb
+
+  portainer:
+    image: portainer/portainer-ce:latest
+    container_name: portainer
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+      - "9443:9443"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - portainer_data:/data
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9443"]
+      timeout: 5s
+
 volumes:
   openmrs-data: ~
   db-data: ~
+  portainer_data: ~
+  dhis2-data: ~
+  pg-data: ~
