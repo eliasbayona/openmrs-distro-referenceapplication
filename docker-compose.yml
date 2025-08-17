@@ -92,7 +92,7 @@ services:
       - "8090:8080"
     volumes:
       - ./dhis2-data:/data
-      - ./dhis2-data/dhis.conf:/data/dhis.conf:ro
+      # - ./dhis.conf:/data/dhis.conf:ro
       - ./mysql-connector-j-9.4.0.jar:/usr/local/tomcat/lib/mysql-connector-j-9.4.0.jar:ro
     environment:
       - DHIS2_HOME=/data
