@@ -37,7 +37,6 @@ services:
     restart: "unless-stopped"
     depends_on:
       - db
-      - dhis2
     environment:
       OMRS_CONFIG_MODULE_WEB_ADMIN: "true"
       OMRS_CONFIG_AUTO_UPDATE_DATABASE: "true"
