@@ -20,7 +20,6 @@ services:
     environment:
       SPA_PATH: /openmrs/spa
       API_URL: /openmrs
-      # API_URL: http://backend:8080/openmrs
       SPA_CONFIG_URLS: /openmrs/spa/config/implementer.json
       SPA_DEFAULT_LOCALE: en
     healthcheck:
@@ -101,23 +100,23 @@ services:
   #   depends_on:
   #     - postgresqldb
 
-  portainer:
-    image: portainer/portainer-ce:latest
-    container_name: portainer
-    restart: unless-stopped
-    ports:
-      - "8000:8000"
-      - "9443:9443"
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-      - portainer_data:/data
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:9443"]
-      timeout: 5s
+  # portainer:
+  #   image: portainer/portainer-ce:latest
+  #   container_name: portainer
+  #   restart: unless-stopped
+  #   ports:
+  #     - "8000:8000"
+  #     - "9443:9443"
+  #   volumes:
+  #     - /var/run/docker.sock:/var/run/docker.sock
+  #     - portainer_data:/data
+  #   healthcheck:
+  #     test: ["CMD", "curl", "-f", "http://localhost:9443"]
+  #     timeout: 5s
 
 volumes:
   openmrs-data: ~
   db-data: ~
-  portainer_data: ~
-  dhis2-data: ~
+  # portainer_data: ~
+  # dhis2-data: ~
   pg-data: ~
