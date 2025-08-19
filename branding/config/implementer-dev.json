@@ -1,0 +1,39 @@
+{
+  "@openmrs/esm-login-app": {
+    "logo": {
+      "src": "${openmrsSpaBase}/assets/logo-fh.png",
+      "alt": "Your Clinic"
+    }
+  },
+  "@openmrs/esm-primary-navigation-app": {
+    "logo": {
+      "src": "${openmrsSpaBase}/assets/logo-fh.png",
+      "name": "Your Clinic"
+    },
+    "extensionSlots": {
+      "homepage-dashboard-slot": {
+        "remove": [
+          "service-queues-dashboard-link"
+        ],
+        "configure": {
+          "patient-lists-dashboard-link": {
+            "title": "patientLists"
+          }
+        }
+      }
+    },
+    "Translation overrides": {
+      "en": { "patientLists": "Patient-Lists" },
+      "fr": { "patientLists": "Listes de patients" }
+    }
+  },
+
+
+  "@openmrs/esm-styleguide": {
+    "Brand color #1": "#831717",
+    "Brand color #2": "#831717",
+    "Brand color #3": "#1978bd"
+   
+  }
+}
+
