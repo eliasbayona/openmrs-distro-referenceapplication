@@ -1,13 +1,13 @@
 {
   "@openmrs/esm-login-app": {
     "logo": {
-      "src": "${openmrsSpaBase}/assets/logo.png",
+      "src": "${openmrsSpaBase}/assets/logo-fh.png",
       "alt": "Your Clinic"
     }
   },
   "@openmrs/esm-primary-navigation-app": {
     "logo": {
-      "src": "${openmrsSpaBase}/assets/logo.png",
+      "src": "${openmrsSpaBase}/assets/logo-fh.png",
       "name": "Your Clinic"
     },
     "extensionSlots": {
