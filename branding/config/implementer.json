@@ -29,9 +29,9 @@
   },
   "@openmrs/esm-patient-registration-app": {
     "fieldDefinitions": [
-      { "id": "mobile", "name": "Cell Number", "type": "person attribute", "uuid": "536b587e-7fd0-478d-9dc1-7b09f004da24",
+      { "id": "mobile", "name": "Cell Number", "type": "person attribute", "uuid": "424f37d1-7f1e-4914-8af6-0ab92f1b47c8",
         "validation": { "matches": "^[0-9+()\\-\\s]{6,}$" } },
-      { "id": "landline", "name": "Landline", "type": "person attribute", "uuid": "a7979f40-38a4-464b-89fe-356cc6077087" },
+      { "id": "landline", "name": "Landline", "type": "person attribute", "uuid": "63ba56bb-de22-460b-ab59-312d8f9a6324" },
 
       { "id": "nokName", "name": "Next Of Kin Full Name", "type": "person attribute", "uuid": "2ea80cba-2273-4053-b68c-67934f7964c6" },
       { "id": "nokPhone", "name": "Next Of Kin Phone Number", "type": "person attribute", "uuid": "2efc5b30-49c3-46a5-9705-dca5052d1b57",
