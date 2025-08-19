@@ -43,7 +43,7 @@
         "uuid": "3b2cb198-ba2a-4d39-b13f-8dbf73770c6b",
         "answerConceptSetUuid": "fc02bd02-eef2-47f9-90f7-ac887f3ec26e" },
 
-      { "id": "idPassport", "name": "ID/Passport number", "type": "person attribute", "uuid": "186336c7-50d5-4945-8dd4-4a4468909e2e" },
+      { "id": "idPassport", "required": true, "name": "ID/Passport number", "type": "person attribute", "uuid": "186336c7-50d5-4945-8dd4-4a4468909e2e" },
       { "id": "occupation", "name": "Occupation", "type": "person attribute", "uuid": "3ffe5cae-c9b2-44e7-82e9-47370b352f4b" },
       { "id": "employer", "name": "Employer", "type": "person attribute", "uuid": "409fdb9e-18a5-4cfc-bfce-533a7c3529d9" },
       { "id": "email", "name": "Email address", "type": "person attribute", "uuid": "3840e590-7ba4-11f0-a5e8-12c5aa7d76cc" },
@@ -55,14 +55,14 @@
         "uuid": "18a13199-b250-46e0-ac45-ab14e92efa2c",
         "answerConceptSetUuid": "3bc7bb98-d35e-4300-bcdc-f8415c197a6c" },
 
-      { "id": "knownAllergies", "name": "Known Allergies", "type": "person attribute", "uuid": "fc301604-200b-4cf0-818f-52ee9e1a2c2b" },
-      { "id": "previousSurgeries", "name": "Previous surgeries and year", "type": "person attribute", "uuid": "e8edf051-0a93-43f4-8eea-5762e758c8d5" },
+      { "id": "knownAllergies", "required": true, "name": "Known Allergies", "type": "person attribute", "uuid": "fc301604-200b-4cf0-818f-52ee9e1a2c2b" },
+      { "id": "previousSurgeries", "widget": "textarea", "name": "Previous surgeries and year", "type": "person attribute", "uuid": "e8edf051-0a93-43f4-8eea-5762e758c8d5" },
 
       { "id": "chronicIllnesses", "name": "Chronic illnesses", "type": "person attribute",
         "uuid": "17d23e4f-6d19-44e8-b53e-3a5ef7256bf9",
         "answerConceptSetUuid": "1e171377-392b-4600-a3c3-70c300042158" },
 
-      { "id": "chronicOtherDetails", "name": "Details of other", "type": "person attribute", "uuid": "963cffa5-d709-4708-b12e-8d951b661a6f" },
+      { "id": "chronicOtherDetails", "widget": "textarea", "name": "Details of other", "type": "person attribute", "uuid": "963cffa5-d709-4708-b12e-8d951b661a6f" },
 
       { "id": "nokLandline", "name": "Next Of Kin Landline", "type": "person attribute", "uuid": "e72454fb-d832-4007-b76b-6a43c39b310b" }
     ],
