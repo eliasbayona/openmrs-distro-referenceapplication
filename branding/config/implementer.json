@@ -125,9 +125,9 @@
     }
   },
   "@openmrs/esm-styleguide": {
-    "Brand color #1": "#831717",
-    "Brand color #2": "#831717",
-    "Brand color #3": "#1978bd"
+    "Brand color #1": "#2a79bd",
+    "Brand color #2": "#2a79bd",
+    "Brand color #3": "#ff7f0e"
    
   }
 }
