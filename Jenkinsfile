@@ -5,7 +5,7 @@ pipeline {
   stages {
     stage('Checkout') {
       steps {
-        git branch: 'main',
+        git branch: 'fhp-main',
             url: 'https://github.com/eliasbayona/openmrs-distro-referenceapplication.git',
             credentialsId: 'github-pat'
       }

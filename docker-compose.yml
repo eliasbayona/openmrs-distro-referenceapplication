@@ -70,19 +70,19 @@ services:
     volumes:
       - db-data:/var/lib/mysql
 
-  postgresqldb:
-    image: postgis/postgis:13-3.3
-    environment:
-      POSTGRES_DB: dhis2
-      POSTGRES_USER: dhis
-      POSTGRES_PASSWORD: dhis
-    volumes:
-      - pg-data:/var/lib/postgresql/data
-    healthcheck:
-      test: ["CMD", "pg_isready", "-U", "dhis", "-d", "dhis2"]
-      interval: 5s
-      timeout: 5s
-      retries: 5
+  # postgresqldb:
+  #   image: postgis/postgis:13-3.3
+  #   environment:
+  #     POSTGRES_DB: dhis2
+  #     POSTGRES_USER: dhis
+  #     POSTGRES_PASSWORD: dhis
+  #   volumes:
+  #     - pg-data:/var/lib/postgresql/data
+  #   healthcheck:
+  #     test: ["CMD", "pg_isready", "-U", "dhis", "-d", "dhis2"]
+  #     interval: 5s
+  #     timeout: 5s
+  #     retries: 5
 
   # dhis2:
   #   image: dhis2/core:2.40
@@ -119,4 +119,4 @@ volumes:
   db-data: ~
   # portainer_data: ~
   # dhis2-data: ~
-  pg-data: ~
+  # pg-data: ~
