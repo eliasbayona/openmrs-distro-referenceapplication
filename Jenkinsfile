@@ -12,7 +12,7 @@ pipeline {
     }
     stage('Deploy') {
       steps {
-        sh '''
+        sh '''#!/usr/bin/env bash
           set -euxo pipefail
           # Safely load .env if present (handles spaces and quotes)
           if [ -f .env ]; then
