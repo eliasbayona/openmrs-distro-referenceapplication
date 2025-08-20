@@ -69,54 +69,6 @@ services:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-openmrs}
     volumes:
       - db-data:/var/lib/mysql
-
-  # postgresqldb:
-  #   image: postgis/postgis:13-3.3
-  #   environment:
-  #     POSTGRES_DB: dhis2
-  #     POSTGRES_USER: dhis
-  #     POSTGRES_PASSWORD: dhis
-  #   volumes:
-  #     - pg-data:/var/lib/postgresql/data
-  #   healthcheck:
-  #     test: ["CMD", "pg_isready", "-U", "dhis", "-d", "dhis2"]
-  #     interval: 5s
-  #     timeout: 5s
-  #     retries: 5
-
-  # dhis2:
-  #   image: dhis2/core:2.40
-  #   ports:
-  #     - "8090:8080"
-  #   volumes:
-  #     - ./dhis2-data:/data
-  #     - ./dhis.conf:/data/dhis.conf:ro
-  #   environment:
-  #     - DHIS2_HOME=/data
-  #     - DHIS2_DATABASE_HOST=postgresqldb
-  #     - DHIS2_DATABASE_NAME=dhis2
-  #     - DHIS2_DATABASE_USERNAME=dhis
-  #     - DHIS2_DATABASE_PASSWORD=dhis
-  #   depends_on:
-  #     - postgresqldb
-
-  # portainer:
-  #   image: portainer/portainer-ce:latest
-  #   container_name: portainer
-  #   restart: unless-stopped
-  #   ports:
-  #     - "8000:8000"
-  #     - "9443:9443"
-  #   volumes:
-  #     - /var/run/docker.sock:/var/run/docker.sock
-  #     - portainer_data:/data
-  #   healthcheck:
-  #     test: ["CMD", "curl", "-f", "http://localhost:9443"]
-  #     timeout: 5s
-
 volumes:
   openmrs-data: ~
   db-data: ~
-  # portainer_data: ~
-  # dhis2-data: ~
-  # pg-data: ~
