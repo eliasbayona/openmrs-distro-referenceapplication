@@ -29,42 +29,42 @@
   },
   "@openmrs/esm-patient-registration-app": {
     "fieldDefinitions": [
-      { "id": "mobile", "name": "Cell Number", "type": "person attribute", "uuid": "424f37d1-7f1e-4914-8af6-0ab92f1b47c8",
+      { "id": "mobile", "name": "Cell Number", "type": "person attribute", "uuid": "1178a504-e7c4-45b4-a5d1-3f12375ab3c9",
         "validation": { "matches": "^[0-9+()\\-\\s]{6,}$" } },
-      { "id": "landline", "name": "Landline", "type": "person attribute", "uuid": "63ba56bb-de22-460b-ab59-312d8f9a6324" },
+      { "id": "landline", "name": "Landline", "type": "person attribute", "uuid": "d3a70b47-1bd7-42b0-8392-ca403081ee8d" },
 
-      { "id": "nokName", "name": "Next Of Kin Full Name", "type": "person attribute", "uuid": "10a61085-9fb9-4ef8-9a3c-67e89fca2937" },
-      { "id": "nokPhone", "name": "Next Of Kin Phone Number", "type": "person attribute", "uuid": "55c6a764-9195-458d-b489-3e98e42b18ec",
+      { "id": "nokName", "name": "Next Of Kin Full Name", "type": "person attribute", "uuid": "08d2ce09-192f-4b22-b67b-b4b4805730cf" },
+      { "id": "nokPhone", "name": "Next Of Kin Phone Number", "type": "person attribute", "uuid": "b99f5f17-8380-4cd6-955b-5a66feaea5ff",
         "validation": { "matches": "^[0-9+()\\-\\s]{6,}$" } },
 
-      { "id": "medicalAidNumber", "name": "Medical Aid Number", "type": "person attribute", "uuid": "e6f6fb49-7446-4b5d-89a0-3d6470794fd2" },
-      { "id": "principalMemberName", "name": "Name of Principal Member", "type": "person attribute", "uuid": "0a46456e-98ff-403d-bac6-62d757c7ac8b" },
+      { "id": "medicalAidNumber", "name": "Medical Aid Number", "type": "person attribute", "uuid": "da9ab6e0-dd4d-4ca7-a4d0-de9f01f57b28" },
+      { "id": "principalMemberName", "name": "Name of Principal Member", "type": "person attribute", "uuid": "87f1cece-91a5-4b2e-96ba-cd599d476b5a" },
       { "id": "relationshipToPrincipal", "name": "Relationship to Principal", "type": "person attribute",
-        "uuid": "3b2cb198-ba2a-4d39-b13f-8dbf73770c6b",
-        "answerConceptSetUuid": "fc02bd02-eef2-47f9-90f7-ac887f3ec26e" },
+        "uuid": "7863bf6f-2534-41aa-ba7e-8e22ecd4f28c",
+        "answerConceptSetUuid": "5fd23084-8dfd-43eb-8d9a-349ca84ceec5" },
 
-      { "id": "idPassport", "required": true, "name": "ID/Passport number", "type": "person attribute", "uuid": "186336c7-50d5-4945-8dd4-4a4468909e2e" },
-      { "id": "occupation", "name": "Occupation", "type": "person attribute", "uuid": "3ffe5cae-c9b2-44e7-82e9-47370b352f4b" },
-      { "id": "employer", "name": "Employer", "type": "person attribute", "uuid": "409fdb9e-18a5-4cfc-bfce-533a7c3529d9" },
-      { "id": "email", "name": "Email address", "type": "person attribute", "uuid": "3840e590-7ba4-11f0-a5e8-12c5aa7d76cc" },
+      { "id": "idPassport", "required": true, "name": "ID/Passport number", "type": "person attribute", "uuid": "1b7dfcdb-8c01-48de-9057-d0bcc985b8ec" },
+      { "id": "occupation", "name": "Occupation", "type": "person attribute", "uuid": "221ab9ef-3ec4-4de1-a75e-f0c3b1182e5c" },
+      { "id": "employer", "name": "Employer", "type": "person attribute", "uuid": "32bf0f66-3b3f-46d2-bea7-53318f637cb7" },
+      { "id": "email", "name": "Email address", "type": "person attribute", "uuid": "8926bdac-7e22-11f0-90f9-3aae1a0e24f5" },
 
-      { "id": "medicalAidProvider", "name": "Medical aid (Provider)", "type": "person attribute", "uuid": "8d26bfef-a2ac-40b8-bf21-3a2c40f6fd67",
-      "answerConceptSetUuid": "12d011a5-a46d-4e94-be79-628f51c5ebe7"  },
+      { "id": "medicalAidProvider", "name": "Medical aid (Provider)", "type": "person attribute", "uuid": "4c949357-e191-4fbb-bcec-962763cace8b",
+      "answerConceptSetUuid": "8e0ccc0d-2ab7-45c0-adb3-85c9cf37418e"  },
 
       { "id": "membershipType", "name": "Membership Type (Principal/Dependent)", "type": "person attribute",
-        "uuid": "18a13199-b250-46e0-ac45-ab14e92efa2c",
-        "answerConceptSetUuid": "3bc7bb98-d35e-4300-bcdc-f8415c197a6c" },
+        "uuid": "d0ff6293-471e-4b71-9b1e-fff316bcf444",
+        "answerConceptSetUuid": "5923418f-744f-492f-bd07-aea0e70ac352" },
 
-      { "id": "knownAllergies", "required": true, "name": "Known Allergies", "type": "person attribute", "uuid": "fc301604-200b-4cf0-818f-52ee9e1a2c2b" },
-      { "id": "previousSurgeries", "widget": "textarea", "name": "Previous surgeries and year", "type": "person attribute", "uuid": "e8edf051-0a93-43f4-8eea-5762e758c8d5" },
+      { "id": "knownAllergies", "required": true, "name": "Known Allergies", "type": "person attribute", "uuid": "59ac0b1d-a122-4fdc-b33f-1bfb1fc8d988" },
+      { "id": "previousSurgeries", "widget": "textarea", "name": "Previous surgeries and year", "type": "person attribute", "uuid": "eaaf9ce1-dada-4c0b-a4a9-34875edae1d5" },
 
       { "id": "chronicIllnesses", "name": "Chronic illnesses", "type": "person attribute",
-        "uuid": "17d23e4f-6d19-44e8-b53e-3a5ef7256bf9",
-        "answerConceptSetUuid": "1e171377-392b-4600-a3c3-70c300042158" },
+        "uuid": "dddf26fb-79a7-46c7-b947-5fb1c757099e",
+        "answerConceptSetUuid": "656d9747-5786-4509-9279-f31959785036" },
 
-      { "id": "chronicOtherDetails", "widget": "textarea", "name": "Details of other", "type": "person attribute", "uuid": "963cffa5-d709-4708-b12e-8d951b661a6f" },
+      { "id": "chronicOtherDetails", "widget": "textarea", "name": "Details of other", "type": "person attribute", "uuid": "bbfbee3f-8dd4-497f-879a-559042c1e6d6" },
 
-      { "id": "nokLandline", "name": "Next Of Kin Landline", "type": "person attribute", "uuid": "e72454fb-d832-4007-b76b-6a43c39b310b" }
+      { "id": "nokLandline", "name": "Next Of Kin Landline", "type": "person attribute", "uuid": "b1c17578-e573-431b-aa6a-e091ec79522a" }
     ],
 
     "sectionDefinitions": [
