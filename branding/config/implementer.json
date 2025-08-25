@@ -48,8 +48,10 @@
       { "id": "employer", "name": "Employer", "type": "person attribute", "uuid": "32bf0f66-3b3f-46d2-bea7-53318f637cb7" },
       { "id": "email", "name": "Email address", "type": "person attribute", "uuid": "8926bdac-7e22-11f0-90f9-3aae1a0e24f5" },
 
-      { "id": "medicalAidProvider", "name": "Medical aid (Provider)", "type": "person attribute", "uuid": "4c949357-e191-4fbb-bcec-962763cace8b",
+      { "id": "medicalAidProvider", "name": "Guarantor", "type": "person attribute", "uuid": "4c949357-e191-4fbb-bcec-962763cace8b",
       "answerConceptSetUuid": "8e0ccc0d-2ab7-45c0-adb3-85c9cf37418e"  },
+
+      { "id": "policyStartDate", "name": "Policy start date", "type": "person attribute", "uuid": "840dc73b-551c-4eef-938d-162371f188e9" },
 
       { "id": "membershipType", "name": "Membership Type (Principal/Dependent)", "type": "person attribute",
         "uuid": "d0ff6293-471e-4b71-9b1e-fff316bcf444",
@@ -75,8 +77,8 @@
       },
       {
         "id": "medicalAidInfo",
-        "name": "Medical Aid Information",
-        "fields": ["medicalAidProvider", "medicalAidNumber", "membershipType", "principalMemberName", "relationshipToPrincipal"]
+        "name": "Insurance Information",
+        "fields": ["medicalAidProvider", "medicalAidNumber", "policyStartDate", "membershipType", "principalMemberName", "relationshipToPrincipal"]
       },
       {
         "id": "medicalHistory",
