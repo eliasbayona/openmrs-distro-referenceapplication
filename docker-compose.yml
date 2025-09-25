@@ -123,11 +123,11 @@ services:
       - "8081:8080"
     volumes:
       # Persist Jasper app state
-      - jasper-server-data:/usr/local/tomcat/webapps/jasperserver
-      # MySQL JDBC driver so Jasper can connect to OpenMRS (service "db")
-      - ./jasper/drivers/mysql-connector-j-8.0.33.jar:/usr/local/tomcat/webapps/jasperserver/WEB-INF/lib/mysql-connector-j-8.0.33.jar:ro
+    - jasper-server-data:/usr/local/tomcat/webapps/ROOT
+    - ./jasper/drivers/mysql-connector-j-8.0.33.jar:/usr/local/tomcat/lib/mysql-connector-j-8.0.33.jar:ro
+
     healthcheck:
-      test: ["CMD-SHELL", "curl -fsS http://localhost:8080/jasperserver/login.html >/dev/null || exit 1"]
+      test: ["CMD-SHELL", "curl -fsS http://localhost:8080/login.html >/dev/null || exit 1"]
       interval: 15s
       timeout: 5s
       retries: 30
