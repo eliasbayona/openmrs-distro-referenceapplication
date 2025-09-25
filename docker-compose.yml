@@ -95,7 +95,7 @@ services:
       - jasper-pg-data:/var/lib/postgresql/data
 
   jasperserver:
-    image: docker.io/bitnami/jasperreports:8.2.0
+    image: kornelbrenkacz/jasperreports
     restart: unless-stopped
     depends_on:
       - jasperdb
