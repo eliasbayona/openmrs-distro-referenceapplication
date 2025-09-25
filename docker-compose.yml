@@ -95,7 +95,7 @@ services:
       - jasper-pg-data:/var/lib/postgresql/data
 
   jasperserver:
-    image: jasperserver/jasperserver-ce:latest
+    image: docker.io/bitnami/jasperreports:8.2.0
     restart: unless-stopped
     depends_on:
       - jasperdb
@@ -105,7 +105,7 @@ services:
       DB_PORT: 5432
       DB_NAME: jasperserver
       DB_USERNAME: jasper
-      DB_PASSWORD: changeMeStrong!
+      DB_PASSWORD: jasper
     # Optional: expose for direct testing; the gateway will reverse-proxy it anyway
     ports:
       - "8081:8080"   # http://<host>:8081/jasperserver
