@@ -83,38 +83,50 @@ services:
       interval: 5s
       timeout: 5s
       retries: 5
-#########Jasper Reporting
+
+######### Jasper Reporting
   jasperdb:
     image: postgres:14
     restart: unless-stopped
     environment:
       POSTGRES_USER: jasper
-      POSTGRES_PASSWORD: changeMeStrong!
+      POSTGRES_PASSWORD: tcf3saE2qUF9VmEu
       POSTGRES_DB: jasperserver
     volumes:
       - jasper-pg-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U jasper -d jasperserver"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
 
   jasperserver:
-    image: kornelbrenkacz/jasperreports
+    image: retriever/jasperserver:latest
     restart: unless-stopped
     depends_on:
       - jasperdb
     environment:
+      # Tell this image to use Postgres as the Jasper repository DB
       DB_TYPE: postgresql
       DB_HOST: jasperdb
-      DB_PORT: 5432
+      DB_PORT: "5432"
       DB_NAME: jasperserver
       DB_USERNAME: jasper
-      DB_PASSWORD: jasper
-    # Optional: expose for direct testing; the gateway will reverse-proxy it anyway
+      DB_PASSWORD: tcf3saE2qUF9VmEu
     ports:
       - "8081:8080"   # http://<host>:8081/jasperserver
     volumes:
-      # Persist Jasper app data (orgs, schedules, temp, exports)
-      - jasper-server-data:/usr/local/share/jasperserver
-      # Provide MySQL JDBC driver so Jasper can connect to your OpenMRS DB
+      # Persist Jasper app state
+      - jasper-server-data:/usr/local/tomcat/webapps/jasperserver
+      # MySQL JDBC driver so Jasper can connect to OpenMRS (service "db")
       - ./jasper/drivers/mysql-connector-j-8.0.33.jar:/usr/local/tomcat/webapps/jasperserver/WEB-INF/lib/mysql-connector-j-8.0.33.jar:ro
-##########End of Jasper Reporting
+    healthcheck:
+      test: ["CMD-SHELL", "curl -fsS http://localhost:8080/jasperserver/login.html >/dev/null || exit 1"]
+      interval: 15s
+      timeout: 5s
+      retries: 30
+########## End of Jasper Reporting
+
   # dhis2:
   #   image: dhis2/core:2.40
   #   ports:
