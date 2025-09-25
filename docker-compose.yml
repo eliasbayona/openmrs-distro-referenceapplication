@@ -83,7 +83,38 @@ services:
       interval: 5s
       timeout: 5s
       retries: 5
+#########Jasper Reporting
+  jasperdb:
+    image: postgres:14
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: jasper
+      POSTGRES_PASSWORD: changeMeStrong!
+      POSTGRES_DB: jasperserver
+    volumes:
+      - jasper-pg-data:/var/lib/postgresql/data
 
+  jasperserver:
+    image: jasperserver/jasperserver-ce:latest
+    restart: unless-stopped
+    depends_on:
+      - jasperdb
+    environment:
+      DB_TYPE: postgresql
+      DB_HOST: jasperdb
+      DB_PORT: 5432
+      DB_NAME: jasperserver
+      DB_USERNAME: jasper
+      DB_PASSWORD: changeMeStrong!
+    # Optional: expose for direct testing; the gateway will reverse-proxy it anyway
+    ports:
+      - "8081:8080"   # http://<host>:8081/jasperserver
+    volumes:
+      # Persist Jasper app data (orgs, schedules, temp, exports)
+      - jasper-server-data:/usr/local/share/jasperserver
+      # Provide MySQL JDBC driver so Jasper can connect to your OpenMRS DB
+      - ./jasper/drivers/mysql-connector-j-8.0.33.jar:/usr/local/tomcat/webapps/jasperserver/WEB-INF/lib/mysql-connector-j-8.0.33.jar:ro
+##########End of Jasper Reporting
   # dhis2:
   #   image: dhis2/core:2.40
   #   ports:
@@ -120,3 +151,5 @@ volumes:
   # portainer_data: ~
   # dhis2-data: ~
   pg-data: ~
+  jasper-pg-data: ~
+  jasper-server-data: ~
