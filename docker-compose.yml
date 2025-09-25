@@ -100,31 +100,37 @@ services:
       timeout: 5s
       retries: 10
 
-  jasperserver:
-    image: retriever/jasperserver:latest
-    restart: unless-stopped
-    depends_on:
-      - jasperdb
-    environment:
-      # Tell this image to use Postgres as the Jasper repository DB
-      DB_TYPE: postgresql
-      DB_HOST: jasperdb
-      DB_PORT: "5432"
-      DB_NAME: jasperserver
-      DB_USERNAME: jasper
-      DB_PASSWORD: tcf3saE2qUF9VmEu
-    ports:
-      - "8081:8080"   # http://<host>:8081/jasperserver
-    volumes:
-      # Persist Jasper app state
-      - jasper-server-data:/usr/local/tomcat/webapps/jasperserver
-      # MySQL JDBC driver so Jasper can connect to OpenMRS (service "db")
-      - ./jasper/drivers/mysql-connector-j-8.0.33.jar:/usr/local/tomcat/webapps/jasperserver/WEB-INF/lib/mysql-connector-j-8.0.33.jar:ro
-    healthcheck:
-      test: ["CMD-SHELL", "curl -fsS http://localhost:8080/jasperserver/login.html >/dev/null || exit 1"]
-      interval: 15s
-      timeout: 5s
-      retries: 30
+jasperserver:
+  image: retriever/jasperserver:latest
+  restart: unless-stopped
+  depends_on:
+    - jasperdb
+  environment:
+    # Repository DB (PostgreSQL) – use the names this image actually reads
+    DB_TYPE: postgresql
+    DB_HOST: jasperdb
+    DB_PORT: "5432"
+    DB_NAME: jasperserver
+
+    # IMPORTANT: this image expects DB_USER / DB_PASS (not DB_USERNAME / DB_PASSWORD)
+    DB_USER: jasper
+    DB_PASS: tcf3saE2qUF9VmEu
+
+    # (Optionally keep these too, some builds read both; harmless)
+    DB_USERNAME: jasper
+    DB_PASSWORD: tcf3saE2qUF9VmEu
+  ports:
+    - "8081:8080"
+  volumes:
+    # Persist Jasper app state
+    - jasper-server-data:/usr/local/tomcat/webapps/jasperserver
+    # MySQL JDBC driver so Jasper can connect to OpenMRS (service "db")
+    - ./jasper/drivers/mysql-connector-j-8.0.33.jar:/usr/local/tomcat/webapps/jasperserver/WEB-INF/lib/mysql-connector-j-8.0.33.jar:ro
+  healthcheck:
+    test: ["CMD-SHELL", "curl -fsS http://localhost:8080/jasperserver/login.html >/dev/null || exit 1"]
+    interval: 15s
+    timeout: 5s
+    retries: 30
 ########## End of Jasper Reporting
 
   # dhis2:
