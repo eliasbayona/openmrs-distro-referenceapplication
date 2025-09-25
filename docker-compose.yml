@@ -123,7 +123,6 @@ services:
       - "8081:8080"
     volumes:
       # Persist Jasper app state
-    - jasper-server-data:/usr/local/tomcat/webapps/ROOT
     - ./jasper/drivers/mysql-connector-j-8.0.33.jar:/usr/local/tomcat/lib/mysql-connector-j-8.0.33.jar:ro
 
     healthcheck:
