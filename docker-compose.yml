@@ -84,7 +84,7 @@ services:
       timeout: 5s
       retries: 5
 
-######### Jasper Reporting
+######## Jasper Reporting
   jasperdb:
     image: postgres:14
     restart: unless-stopped
