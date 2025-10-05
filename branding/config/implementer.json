@@ -103,7 +103,7 @@
       {
         "id": "additionalPatientInfo",
         "name": "Additional Patient Information",
-        "fields": ["idPassport", "occupation", "employer", "email", "mobile", "landline"]
+        "fields": ["occupation", "employer", "email", "mobile", "landline"]
       },
       {
         "id": "medicalAidInfo",
