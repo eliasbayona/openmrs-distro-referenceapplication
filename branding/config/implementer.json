@@ -111,11 +111,6 @@
         "fields": ["medicalAidProvider", "medicalAidNumber", "policyStartDate", "membershipType", "principalMemberName", "relationshipToPrincipal"]
       },
       {
-        "id": "medicalHistory",
-        "name": "Medical History",
-        "fields": ["knownAllergies", "previousSurgeries", "chronicIllnesses", "chronicOtherDetails"]
-      },
-      {
         "id": "nextOfKin",
         "name": "Next of Kin",
         "fields": ["nokName", "nokPhone", "nokLandline"]
