@@ -84,51 +84,51 @@ services:
       timeout: 5s
       retries: 5
 
-  jasperdb:
-    image: postgres:14
-    restart: unless-stopped
-    environment:
-      POSTGRES_USER: jasper
-      POSTGRES_PASSWORD: tcf3saE2qUF9VmEu
-      POSTGRES_DB: jasperserver
-    volumes:
-      - jasper-pg-data:/var/lib/postgresql/data
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U jasper -d jasperserver"]
-      interval: 10s
-      timeout: 5s
-      retries: 10
+  # jasperdb:
+  #   image: postgres:14
+  #   restart: unless-stopped
+  #   environment:
+  #     POSTGRES_USER: jasper
+  #     POSTGRES_PASSWORD: tcf3saE2qUF9VmEu
+  #     POSTGRES_DB: jasperserver
+  #   volumes:
+  #     - jasper-pg-data:/var/lib/postgresql/data
+  #   healthcheck:
+  #     test: ["CMD-SHELL", "pg_isready -U jasper -d jasperserver"]
+  #     interval: 10s
+  #     timeout: 5s
+  #     retries: 10
 
-  jasperserver:
-    image: retriever/jasperserver:latest
-    restart: unless-stopped
-    depends_on:
-      - jasperdb
-    environment:
-      DB_TYPE: postgresql
-      DB_HOST: jasperdb
-      DB_PORT: "5432"
-      DB_NAME: jasperserver
-      DB_USER: jasper
-      DB_PASS: tcf3saE2qUF9VmEu
-      DB_USERNAME: jasper
-      DB_PASSWORD: tcf3saE2qUF9VmEu
-    ports:
-      - "8081:8080"
-    volumes:
-      - ./jasper/drivers/mysql-connector-j-8.0.33.jar:/usr/local/tomcat/lib/mysql-connector-j-8.0.33.jar:ro
-    healthcheck:
-      test: ["CMD-SHELL", "curl -fsS http://localhost:8080/login.html >/dev/null || exit 1"]
-      interval: 15s
-      timeout: 5s
-      retries: 30
+  # jasperserver:
+  #   image: retriever/jasperserver:latest
+  #   restart: unless-stopped
+  #   depends_on:
+  #     - jasperdb
+  #   environment:
+  #     DB_TYPE: postgresql
+  #     DB_HOST: jasperdb
+  #     DB_PORT: "5432"
+  #     DB_NAME: jasperserver
+  #     DB_USER: jasper
+  #     DB_PASS: tcf3saE2qUF9VmEu
+  #     DB_USERNAME: jasper
+  #     DB_PASSWORD: tcf3saE2qUF9VmEu
+  #   ports:
+  #     - "8081:8080"
+  #   volumes:
+  #     - ./jasper/drivers/mysql-connector-j-8.0.33.jar:/usr/local/tomcat/lib/mysql-connector-j-8.0.33.jar:ro
+  #   healthcheck:
+  #     test: ["CMD-SHELL", "curl -fsS http://localhost:8080/login.html >/dev/null || exit 1"]
+  #     interval: 15s
+  #     timeout: 5s
+  #     retries: 30
 
   openfn_db:
     image: postgres:14
     restart: unless-stopped
     environment:
       POSTGRES_USER: openfn
-      POSTGRES_PASSWORD: ChangeOpenfnPass
+      POSTGRES_PASSWORD: tcf3saE2qUF9VmEu
       POSTGRES_DB: openfn_production
     volumes:
       - openfn-pg-data:/var/lib/postgresql/data
@@ -157,11 +157,11 @@ services:
       - openfn_db
       - redis
     environment:
-      DATABASE_URL: postgres://openfn:ChangeOpenfnPass@openfn_db:5432/openfn_production
+      DATABASE_URL: postgres://openfn:tcf3saE2qUF9VmEu@openfn_db:5432/openfn_production
       REDIS_URL: redis://redis:6379/0
       HOST: 0.0.0.0
       PORT: 8082
-      SECRET_KEY_BASE: SuperSecretKeyForOpenfn
+      SECRET_KEY_BASE: tcf3saE2qUF9VmEu
       SMTP_HOST: smtp.mailserver.com
       SMTP_PORT: 587
       SMTP_USER: smtp-user
@@ -176,8 +176,8 @@ volumes:
   openmrs-data:
   db-data:
   pg-data:
-  jasper-pg-data:
-  jasper-server-data:
+  # jasper-pg-data:
+  # jasper-server-data:
   openfn-pg-data:
   redis_data:
   openfn-data:
