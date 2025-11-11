@@ -3,7 +3,7 @@ version: "3.7"
 services:
   gateway:
     image: openmrs/openmrs-reference-application-3-gateway:3.4.0
-    restart: "unless-stopped"
+    restart: unless-stopped
     depends_on:
       - frontend
       - backend
@@ -16,7 +16,7 @@ services:
 
   frontend:
     image: openmrs/openmrs-reference-application-3-frontend:3.4.0
-    restart: "unless-stopped"
+    restart: unless-stopped
     environment:
       SPA_PATH: /openmrs/spa
       API_URL: /openmrs
@@ -33,7 +33,7 @@ services:
 
   backend:
     image: openmrs/openmrs-reference-application-3-backend:3.4.0
-    restart: "unless-stopped"
+    restart: unless-stopped
     depends_on:
       - db
     environment:
@@ -42,8 +42,8 @@ services:
       OMRS_CONFIG_CREATE_TABLES: "true"
       OMRS_CONFIG_CONNECTION_SERVER: db
       OMRS_CONFIG_CONNECTION_DATABASE: openmrs
-      OMRS_CONFIG_CONNECTION_USERNAME: ${OMRS_DB_USER:-openmrs}
-      OMRS_CONFIG_CONNECTION_PASSWORD: ${OMRS_DB_PASSWORD:-openmrs}
+      OMRS_CONFIG_CONNECTION_USERNAME: openmrs
+      OMRS_CONFIG_CONNECTION_PASSWORD: ChangeOpenmrsPass
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8080/openmrs"]
       timeout: 5s
@@ -55,18 +55,18 @@ services:
 
   db:
     image: mysql:latest
-    restart: "unless-stopped"
+    restart: unless-stopped
     command: "mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_general_ci"
     healthcheck:
-      test: "mysql --user=${OMRS_DB_USER:-openmrs} --password=${OMRS_DB_PASSWORD:-openmrs} --execute \"SHOW DATABASES;\""
+      test: "mysql --user=openmrs --password=ChangeOpenmrsPass --execute 'SHOW DATABASES;'"
       interval: 3s
       timeout: 1s
       retries: 5
     environment:
       MYSQL_DATABASE: openmrs
-      MYSQL_USER: ${OMRS_DB_USER:-openmrs}
-      MYSQL_PASSWORD: ${OMRS_DB_PASSWORD:-openmrs}
-      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-openmrs}
+      MYSQL_USER: openmrs
+      MYSQL_PASSWORD: ChangeOpenmrsPass
+      MYSQL_ROOT_PASSWORD: ChangeMysqlRoot
     volumes:
       - db-data:/var/lib/mysql
 
@@ -84,7 +84,6 @@ services:
       timeout: 5s
       retries: 5
 
-######## Jasper Reporting
   jasperdb:
     image: postgres:14
     restart: unless-stopped
@@ -106,67 +105,79 @@ services:
     depends_on:
       - jasperdb
     environment:
-      # Repository DB (PostgreSQL) – use the names this image actually reads
       DB_TYPE: postgresql
       DB_HOST: jasperdb
       DB_PORT: "5432"
       DB_NAME: jasperserver
-
-      # IMPORTANT: this image expects DB_USER / DB_PASS (not DB_USERNAME / DB_PASSWORD)
       DB_USER: jasper
       DB_PASS: tcf3saE2qUF9VmEu
-
-      # (Optionally keep these too, some builds read both; harmless)
       DB_USERNAME: jasper
       DB_PASSWORD: tcf3saE2qUF9VmEu
     ports:
       - "8081:8080"
     volumes:
-      # Persist Jasper app state
-    - ./jasper/drivers/mysql-connector-j-8.0.33.jar:/usr/local/tomcat/lib/mysql-connector-j-8.0.33.jar:ro
-
+      - ./jasper/drivers/mysql-connector-j-8.0.33.jar:/usr/local/tomcat/lib/mysql-connector-j-8.0.33.jar:ro
     healthcheck:
       test: ["CMD-SHELL", "curl -fsS http://localhost:8080/login.html >/dev/null || exit 1"]
       interval: 15s
       timeout: 5s
       retries: 30
-########## End of Jasper Reporting
 
-  # dhis2:
-  #   image: dhis2/core:2.40
-  #   ports:
-  #     - "8090:8080"
-  #   volumes:
-  #     - ./dhis2-data:/data
-  #     - ./dhis.conf:/data/dhis.conf:ro
-  #   environment:
-  #     - DHIS2_HOME=/data
-  #     - DHIS2_DATABASE_HOST=postgresqldb
-  #     - DHIS2_DATABASE_NAME=dhis2
-  #     - DHIS2_DATABASE_USERNAME=dhis
-  #     - DHIS2_DATABASE_PASSWORD=dhis
-  #   depends_on:
-  #     - postgresqldb
+  openfn_db:
+    image: postgres:14
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: openfn
+      POSTGRES_PASSWORD: ChangeOpenfnPass
+      POSTGRES_DB: openfn_production
+    volumes:
+      - openfn-pg-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U openfn -d openfn_production"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
 
-  # portainer:
-  #   image: portainer/portainer-ce:latest
-  #   container_name: portainer
-  #   restart: unless-stopped
-  #   ports:
-  #     - "8000:8000"
-  #     - "9443:9443"
-  #   volumes:
-  #     - /var/run/docker.sock:/var/run/docker.sock
-  #     - portainer_data:/data
-  #   healthcheck:
-  #     test: ["CMD", "curl", "-f", "http://localhost:9443"]
-  #     timeout: 5s
+  redis:
+    image: redis:7
+    command: ["redis-server", "--appendonly", "yes"]
+    volumes:
+      - redis_data:/data
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  openfn:
+    image: openfn/lightning:latest
+    restart: unless-stopped
+    depends_on:
+      - openfn_db
+      - redis
+    environment:
+      DATABASE_URL: postgres://openfn:ChangeOpenfnPass@openfn_db:5432/openfn_production
+      REDIS_URL: redis://redis:6379/0
+      HOST: 0.0.0.0
+      PORT: 8082
+      SECRET_KEY_BASE: SuperSecretKeyForOpenfn
+      SMTP_HOST: smtp.mailserver.com
+      SMTP_PORT: 587
+      SMTP_USER: smtp-user
+      SMTP_PASSWORD: smtp-pass
+      SMTP_FROM: no-reply@domain.com
+    ports:
+      - "8082:8082"
+    volumes:
+      - openfn-data:/var/lib/openfn
 
 volumes:
-  openmrs-data: ~
-  db-data: ~
-  # portainer_data: ~
-  # dhis2-data: ~
-  pg-data: ~
-  jasper-pg-data: ~
-  jasper-server-data: ~
+  openmrs-data:
+  db-data:
+  pg-data:
+  jasper-pg-data:
+  jasper-server-data:
+  openfn-pg-data:
+  redis_data:
+  openfn-data:
